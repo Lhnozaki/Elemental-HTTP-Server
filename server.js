@@ -87,6 +87,7 @@ const server = http.createServer((req, res) => {
 </li>`;
                   listOfElements += "\n";
                   count++;
+                  return;
                 }
 
                 fs.writeFile(

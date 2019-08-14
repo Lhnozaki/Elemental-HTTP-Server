@@ -14,7 +14,7 @@ function buildHTML(list, num) {
         ${list}
     </ol>
   </body>
-</html>`;
+  </html>`;
 }
 
 module.exports = buildHTML;
