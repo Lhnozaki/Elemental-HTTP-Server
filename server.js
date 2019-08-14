@@ -115,6 +115,65 @@ const server = http.createServer((req, res) => {
         res.end();
       }
     }
+
+    // DELETE Request
+    if (req.method === "DELETE") {
+      let publicDir = [];
+
+      fs.readdir(path.join(__dirname, "/public"), (err, files) => {
+        if (err) throw err;
+
+        files.forEach(e => {
+          publicDir.push(e);
+        });
+      });
+
+      if (publicDir.indexOf(req.url.substr(1))) {
+        fs.unlink(path.join(__dirname, "/public", `/${req.url}`), err => {
+          if (err) {
+            res.writeHead(200, {
+              "Content-Type": "application/json"
+            });
+            res.end(JSON.stringify({ success: false }));
+          }
+          console.log(`${req.url} was deleted from public directory!`);
+        });
+
+        let count = 0;
+        let listOfElements = "\n";
+        fs.readdir(path.join(__dirname, "/public"), (err, files) => {
+          if (err) throw err;
+
+          files.forEach(e => {
+            if (
+              path.extname(e) === ".html" &&
+              e !== "404.html" &&
+              e !== "index.html"
+            ) {
+              listOfElements += `<li>
+<a href="/${e}">${e.slice(0, -5)}</a>
+</li>`;
+              listOfElements += "\n";
+              count++;
+              return;
+            }
+
+            fs.writeFile(
+              path.join(__dirname, "/public", "index.html"),
+              newHtml(listOfElements, count),
+              err => {
+                if (err) throw err;
+
+                res.writeHead(200, {
+                  "Content-Type": "application/json"
+                });
+                res.end(JSON.stringify({ success: true }));
+              }
+            );
+          });
+        });
+      }
+    }
   });
 });
 
