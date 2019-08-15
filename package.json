@@ -1,0 +1,27 @@
+{
+  "name": "elemental-http-server",
+  "version": "0.0.1",
+  "description": "Elemental HTTP",
+  "main": "server.js",
+  "dependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lhnozaki/Elemental-HTTP-Server.git"
+  },
+  "keywords": [
+    "HTTP"
+  ],
+  "author": "Lewis Nozaki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lhnozaki/Elemental-HTTP-Server/issues"
+  },
+  "homepage": "https://github.com/Lhnozaki/Elemental-HTTP-Server#readme"
+}
